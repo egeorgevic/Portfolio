@@ -1,0 +1,94 @@
+/* ==========================================================================
+   berryLush™ — Brand Design Tokens
+   Import into any page to keep the brand consistent:
+     <link rel="stylesheet" href="brand-tokens.css">
+   Then use the variables, e.g.  color: var(--bl-ink);  background: var(--bl-blush);
+   Rules of the brand: 60/30/10 color weighting, rounded corners everywhere,
+   body text is always Berry Ink, Leaf Green is a fresh accent only.
+   ========================================================================== */
+
+:root {
+  /* --- Color (from the Brand Book) --- */
+  --bl-lush:  #E8235A;   /* Lush Berry  · hero color, primary CTAs · ~60% weight */
+  --bl-deep:  #B01345;   /* Deep Berry  · depth, dark buttons, headings, dark sections */
+  --bl-blush: #FDEFF3;   /* Blush       · default light background */
+  --bl-petal: #F9D2DD;   /* Petal       · tints, cards, soft blocks */
+  --bl-leaf:  #2E9E44;   /* Leaf Green  · fresh accent / "yes" checks ONLY */
+  --bl-ink:   #5C1030;   /* Berry Ink   · ALL body text */
+  --bl-white: #ffffff;
+
+  /* Handy tints/gradients */
+  --bl-hero-grad:  linear-gradient(160deg, #FFF4F8 0%, var(--bl-petal) 100%);
+  --bl-berry-grad: linear-gradient(150deg, var(--bl-lush), var(--bl-deep));
+
+  /* --- Typography --- */
+  /* Display (Baloo 2 / Fredoka class): HERO HEADLINES + WORDMARK ONLY */
+  --bl-font-display: 'Baloo 2', system-ui, sans-serif;
+  /* Body (brand book: Calibri; web fallback: Nunito) */
+  --bl-font-body: 'Nunito', 'Calibri', system-ui, sans-serif;
+  --bl-tracking-caps: 0.2em;   /* letterspaced ALL-CAPS labels — use sparingly */
+
+  /* --- Radius (rounded everywhere, no sharp angles) --- */
+  --bl-radius-sm: 14px;
+  --bl-radius:    28px;
+  --bl-radius-lg: 36px;
+  --bl-radius-pill: 999px;
+
+  /* --- Shadow --- */
+  --bl-shadow:    0 18px 50px rgba(176, 19, 69, .14);
+  --bl-shadow-sm: 0 8px 24px  rgba(176, 19, 69, .10);
+  --bl-shadow-cta: 0 10px 24px rgba(232, 35, 90, .34);
+
+  /* --- Motion (respect prefers-reduced-motion below) --- */
+  --bl-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --bl-ease:   cubic-bezier(.4, 0, .2, 1);
+
+  /* --- Commerce defaults --- */
+  --bl-free-ship-threshold: 30;   /* USD; PRD open question: $30 vs $35 */
+}
+
+/* ---- Optional base helpers (use if you want them) ---- */
+
+body.bl-base {
+  font-family: var(--bl-font-body);
+  color: var(--bl-ink);
+  background: var(--bl-blush);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bl-display { font-family: var(--bl-font-display); line-height: 1.05; letter-spacing: -.01em; }
+
+.bl-eyebrow {
+  font-weight: 800;
+  letter-spacing: var(--bl-tracking-caps);
+  text-transform: uppercase;
+  font-size: .72rem;
+  color: var(--bl-lush);
+}
+
+.bl-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--bl-font-body); font-weight: 800; font-size: 1rem;
+  padding: 15px 30px; border: none; cursor: pointer;
+  border-radius: var(--bl-radius-pill);
+  background: var(--bl-lush); color: #fff;
+  box-shadow: var(--bl-shadow-cta);
+  transition: transform .18s var(--bl-spring), box-shadow .18s;
+}
+.bl-btn:hover  { transform: translateY(-3px) scale(1.03); }
+.bl-btn:active { transform: scale(.97); }
+.bl-btn--ghost { background: #fff; color: var(--bl-deep); box-shadow: var(--bl-shadow-sm); }
+.bl-btn--dark  { background: var(--bl-deep); }
+
+/* Accessibility: brand pinks fail contrast on blush — never put pink text on blush.
+   Keep focus states visible. */
+.bl-base :focus-visible,
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--bl-lush);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

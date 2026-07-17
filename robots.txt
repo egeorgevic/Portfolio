@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /live/
+
+Sitemap: https://edwardgeorgevic.com/sitemap.xml
