@@ -76,17 +76,23 @@
     var live = document.querySelector("[data-sc-live]");
     var prevBtn = document.querySelector("[data-sc-prev]");
     var nextBtn = document.querySelector("[data-sc-next]");
+    var countEl = document.querySelector("[data-sc-count]");
     var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var AUTOPLAY_MS = 7000;
     var index = 0, timer = null, autoplayOff = reduced;
 
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+
+    // Tabs are labelled with the project name, so the deck advertises what's in it
     var dots = slides.map(function (slide, i) {
       var title = slide.querySelector("h2");
       var name = title ? title.textContent.trim() : "Project " + (i + 1);
       var dot = document.createElement("button");
       dot.type = "button";
       dot.className = "sc-dot";
-      dot.setAttribute("aria-label", "Show " + name);
+      dot.innerHTML = '<span class="num">' + pad(i + 1) + "</span>";
+      dot.appendChild(document.createTextNode(name));
+      dot.setAttribute("aria-label", "Show project " + (i + 1) + " of " + slides.length + ": " + name);
       dot.addEventListener("click", function () { stopAutoplay(); goTo(i, true); });
       if (dotsWrap) dotsWrap.appendChild(dot);
       return dot;
@@ -98,6 +104,8 @@
         d.classList.toggle("is-active", n === i);
         if (n === i) { d.setAttribute("aria-current", "true"); } else { d.removeAttribute("aria-current"); }
       });
+      slides.forEach(function (s, n) { s.classList.toggle("is-current", n === i); });
+      if (countEl) countEl.innerHTML = "<b>" + pad(i + 1) + "</b> / " + pad(slides.length);
       if (live) {
         var t = slides[i].querySelector("h2");
         live.textContent = "Slide " + (i + 1) + " of " + slides.length + (t ? ": " + t.textContent.trim() : "");
@@ -129,15 +137,23 @@
       if (e.key === "ArrowLeft")  { e.preventDefault(); stopAutoplay(); goTo(index - 1, true); }
     });
 
-    // Keep the dots honest when the user swipes or scrolls the track directly
-    if ("IntersectionObserver" in window) {
-      var scIo = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) setActive(slides.indexOf(e.target));
+    // Keep the tabs honest when the user swipes or scrolls the track directly.
+    // Nearest-slide-by-offset rather than IntersectionObserver: with the peek
+    // layout the final slide can never scroll fully to the start edge, which
+    // makes a threshold-based observer ambiguous at the end of the track.
+    var scrollSyncTimer = null;
+    vp.addEventListener("scroll", function () {
+      if (scrollSyncTimer) window.clearTimeout(scrollSyncTimer);
+      scrollSyncTimer = window.setTimeout(function () {
+        var base = slides[0].offsetLeft;
+        var best = 0, bestDist = Infinity;
+        slides.forEach(function (s, i) {
+          var dist = Math.abs((s.offsetLeft - base) - vp.scrollLeft);
+          if (dist < bestDist) { bestDist = dist; best = i; }
         });
-      }, { root: vp, threshold: 0.6 });
-      slides.forEach(function (s) { scIo.observe(s); });
-    }
+        if (best !== index) setActive(best);
+      }, 90);
+    }, { passive: true });
 
     vp.addEventListener("pointerdown", stopAutoplay);
     vp.addEventListener("mouseenter", pauseAutoplay);
