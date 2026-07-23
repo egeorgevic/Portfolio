@@ -19,7 +19,8 @@ freelance web designer. A fast, accessible, dependency-free static site.
 
 ```
 portfolio/
-├── index.html                     # Home (hero, about, work, services, experience, contact)
+├── index.html                     # Home (one-line hero → work carousel → case studies →
+│                                  #       about, services, experience, contact)
 ├── 404.html                       # Friendly not-found page
 ├── style.css                      # Shared design system + components
 ├── script.js                      # Nav, scroll reveals, image lightbox
