@@ -51,18 +51,20 @@ npx serve .
 
 ## Deploy
 
-It's a static site — host it anywhere. Easiest free options:
+**Live at https://shlub.org** — deployed on Vercel, which builds automatically on every push
+to `main`. `vercel.json` handles caching, security headers, and the custom 404.
 
-- **Netlify** — drag the folder onto app.netlify.com, or `netlify deploy --prod`. `netlify.toml`
-  configures caching, security headers, and the custom 404.
-- **Vercel** — `vercel --prod`. `vercel.json` handles the same.
-- **Cloudflare Pages / GitHub Pages** — point at this folder / repo root; no build command.
+Alternative hosts (it's a static site, so anywhere works): **Netlify** (`netlify.toml` is already
+configured), **Cloudflare Pages**, or **GitHub Pages** — point at the repo root, no build command.
 
-### Before going live (1 quick edit)
+### Canonical domain
 
-The site uses a placeholder domain. Find-and-replace **`https://edwardgeorgevic.com`** with
-your real domain across these files: `index.html`, `work/*.html`, `robots.txt`, `sitemap.xml`.
-These drive canonical URLs, Open Graph / Twitter share cards, and the sitemap.
+The canonical domain is **`https://shlub.org`**, referenced across `index.html`, `work/*.html`,
+`robots.txt` and `sitemap.xml`. These drive canonical URLs, Open Graph / Twitter share cards,
+and the sitemap. If the domain ever changes, find-and-replace it across those four places.
+
+Note: `www.shlub.org` has no DNS record — only the apex domain resolves. Add a `www` CNAME in
+your DNS if you want visitors typing `www.` to land somewhere rather than fail.
 
 ## Editing
 
