@@ -70,8 +70,12 @@
 <section class="showcase" id="work" aria-roledescription="carousel" aria-label="Selected client work">
   <div class="wrap">
     <div class="sc-head reveal">
-      <span class="eyebrow">Selected work</span>
+      <div class="sc-head-left">
+        <span class="eyebrow">Selected work</span>
+        <p class="sc-hint">3 projects — swipe or click through</p>
+      </div>
       <div class="sc-controls">
+        <span class="sc-count" data-sc-count aria-hidden="true"></span>
         <button class="sc-btn" type="button" data-sc-prev aria-label="Previous project">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
         </button>
@@ -153,7 +157,7 @@
 
     </div>
 
-    <div class="sc-dots" data-sc-dots aria-label="Choose a project"></div>
+    <div class="sc-tabs" data-sc-dots aria-label="Choose a project"></div>
     <p class="sc-live" data-sc-live role="status" aria-live="polite"></p>
   </div>
 </section>
