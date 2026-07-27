@@ -1,0 +1,9 @@
+# Security contact for shlub.org
+# If you believe you have found a security or privacy issue with this site,
+# please get in touch via the contact form below.
+
+Contact: https://shlub.org/#contact
+Contact: https://www.linkedin.com/in/ed-georgevic-9749b9209
+Expires: 2027-07-27T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://shlub.org/.well-known/security.txt

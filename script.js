@@ -2,6 +2,19 @@
 (function () {
   "use strict";
 
+  // Footer year — lives here rather than in an inline <script> so script-src
+  // can stay pinned to 'self' with no 'unsafe-inline'.
+  var yr = document.getElementById("yr");
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  // Back-to-top; the href="#top" anchor is the no-JS fallback
+  document.querySelectorAll(".to-top").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
   // Sticky nav shade
   var nav = document.querySelector(".nav");
   function onScroll() {
