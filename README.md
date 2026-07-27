@@ -84,10 +84,15 @@ your DNS if you want visitors typing `www.` to land somewhere rather than fail.
 The form posts to **Web3Forms**, which relays submissions to an inbox without the email
 address ever appearing in the page source.
 
-**The form is not live until an access key is set.** Get a free key at
-<https://web3forms.com> and replace `YOUR_WEB3FORMS_ACCESS_KEY` in the hidden
-`access_key` input in `index.html`. Until then every submission is rejected and the
-visitor sees an error. A hidden `botcheck` honeypot field handles spam.
+The `access_key` in the hidden input in `index.html` is **public by design** — Web3Forms
+keys are meant to sit in client-side HTML, and it is visible in view-source either way.
+It is not a secret and does not belong in an environment variable. What it *can* do if
+scraped is let someone post to your inbox from another site, so **restrict the allowed
+domain to `shlub.org` in the Web3Forms dashboard**. A hidden `botcheck` honeypot field
+catches the rest.
+
+To point submissions at a different inbox, get a new key at <https://web3forms.com> and
+swap the value.
 
 ## Security
 
