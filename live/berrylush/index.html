@@ -9,279 +9,8 @@
 <meta property="og:description" content="A soft, sugar-kissed chew with a molten strawberry heart. Real fruit, plant-based, no artificial colors.">
 <meta name="robots" content="noindex, nofollow">
 <!-- Demo/prototype by Edward Georgevic — fictional brand, part of a portfolio case study. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --lush:#E8235A;      /* Lush Berry */
-    --deep:#B01345;      /* Deep Berry */
-    --blush:#FDEFF3;     /* Blush bg */
-    --petal:#F9D2DD;     /* Petal */
-    --leaf:#2E9E44;      /* Leaf Green */
-    --ink:#5C1030;       /* Berry Ink */
-    --white:#ffffff;
-    --shadow:0 18px 50px rgba(176,19,69,.14);
-    --shadow-sm:0 8px 24px rgba(176,19,69,.10);
-    --r:28px;
-    --display:'Baloo 2', system-ui, sans-serif;
-    --body:'Nunito', system-ui, sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:var(--body);
-    color:var(--ink);
-    background:var(--blush);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,.display{font-family:var(--display);line-height:1.05;letter-spacing:-.01em}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-  .eyebrow{
-    font-weight:800;letter-spacing:.22em;text-transform:uppercase;
-    font-size:.72rem;color:var(--lush);margin-bottom:14px;
-  }
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;
-    font-family:var(--body);font-weight:800;font-size:1rem;
-    padding:15px 30px;border-radius:999px;border:none;cursor:pointer;
-    background:var(--lush);color:#fff;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;
-    box-shadow:0 10px 24px rgba(232,35,90,.34);
-  }
-  .btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 16px 30px rgba(232,35,90,.42)}
-  .btn:active{transform:scale(.97)}
-  .btn.ghost{background:#fff;color:var(--deep);box-shadow:var(--shadow-sm)}
-  .btn.dark{background:var(--deep);box-shadow:0 10px 24px rgba(176,19,69,.34)}
-
-  /* announcement */
-  .announce{
-    background:var(--deep);color:#fff;text-align:center;
-    font-weight:700;font-size:.85rem;letter-spacing:.03em;padding:9px 16px;
-  }
-  .announce span{opacity:.85;margin:0 10px}
-
-  /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(253,239,243,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,35,90,.10)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.5rem;color:var(--deep)}
-  .logo b{color:var(--lush);font-weight:800}
-  .logo .berry{font-weight:700;font-style:normal}
-  nav ul{display:flex;gap:30px;list-style:none;font-weight:700;font-size:.95rem}
-  nav ul a{transition:color .15s}
-  nav ul a:hover{color:var(--lush)}
-  .nav-right{display:flex;align-items:center;gap:14px}
-  .cart-btn{position:relative;background:#fff;border:none;width:46px;height:46px;border-radius:50%;cursor:pointer;box-shadow:var(--shadow-sm);display:grid;place-items:center;transition:transform .18s}
-  .cart-btn:hover{transform:scale(1.08)}
-  .cart-count{position:absolute;top:-4px;right:-4px;background:var(--lush);color:#fff;font-size:.7rem;font-weight:800;min-width:20px;height:20px;border-radius:999px;display:grid;place-items:center;padding:0 5px}
-  .menu-toggle{display:none;background:none;border:none;cursor:pointer}
-
-  /* blobs */
-  .blob{position:absolute;border-radius:50%;background:var(--petal);opacity:.55;z-index:0;pointer-events:none}
-
-  /* hero */
-  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#FFF4F8 0%,var(--petal) 100%);padding:70px 0 90px}
-  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-  .hero .badge{display:inline-block;background:var(--lush);color:#fff;font-weight:800;font-size:.72rem;letter-spacing:.2em;padding:7px 16px;border-radius:999px;margin-bottom:22px}
-  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);color:var(--deep);margin-bottom:20px}
-  .hero h1 em{color:var(--lush);font-style:normal}
-  .hero p.lead{font-size:1.2rem;max-width:460px;margin-bottom:14px;font-weight:600}
-  .hero .price-note{font-weight:700;color:var(--deep);opacity:.7;margin-bottom:26px}
-  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-art{position:relative;display:grid;place-items:center}
-  .hero-art .disc{position:absolute;width:88%;aspect-ratio:1;background:radial-gradient(circle at 35% 30%,#fff 0%,var(--petal) 70%);border-radius:50%;box-shadow:var(--shadow)}
-  .hero-art svg{position:relative;z-index:2;width:min(360px,80%);filter:drop-shadow(0 24px 34px rgba(176,19,69,.28));animation:float 5s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
-
-  /* claims strip */
-  .claims{background:var(--lush);color:#fff;padding:26px 0}
-  .claims .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;text-align:center}
-  .claim{flex:1;min-width:160px;display:flex;flex-direction:column;align-items:center;gap:8px}
-  .claim .ico{width:44px;height:44px;background:rgba(255,255,255,.16);border-radius:50%;display:grid;place-items:center}
-  .claim b{font-weight:800;font-size:1rem;letter-spacing:.01em}
-
-  /* section basics */
-  section.pad{padding:88px 0}
-  .section-head{text-align:center;max-width:640px;margin:0 auto 54px}
-  .section-head h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--deep);margin-bottom:14px}
-  .section-head p{font-size:1.12rem;font-weight:600;opacity:.85}
-
-  /* featured product */
-  .featured{background:#fff}
-  .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-  .feat-visual{background:linear-gradient(160deg,var(--blush),var(--petal));border-radius:36px;padding:50px;display:grid;place-items:center;position:relative;overflow:hidden;min-height:420px}
-  .feat-visual svg{width:min(300px,80%);filter:drop-shadow(0 20px 28px rgba(176,19,69,.2));animation:float 6s ease-in-out infinite}
-  .feat-tag{position:absolute;top:22px;left:22px;background:var(--lush);color:#fff;font-weight:800;letter-spacing:.14em;font-size:.72rem;padding:8px 16px;border-radius:999px}
-  .feat-info h3{font-size:clamp(1.8rem,3.5vw,2.4rem);color:var(--deep);margin-bottom:8px}
-  .stars{color:var(--lush);font-size:1.05rem;margin-bottom:16px}
-  .stars small{color:var(--ink);opacity:.6;font-weight:700;margin-left:6px}
-  .feat-info .desc{font-size:1.08rem;margin-bottom:22px;font-weight:600}
-  .feat-perks{list-style:none;margin-bottom:26px;display:grid;gap:10px}
-  .feat-perks li{display:flex;align-items:center;gap:12px;font-weight:700}
-  .feat-perks .dot{width:22px;height:22px;border-radius:50%;background:var(--leaf);display:grid;place-items:center;flex:none}
-  .feat-perks .dot svg{width:12px;height:12px}
-  .buy-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-  .buy-row .price{font-family:var(--display);font-weight:800;font-size:2rem;color:var(--deep)}
-  .buy-row .price small{font-size:.9rem;font-weight:700;opacity:.6;font-family:var(--body)}
-
-  /* product line */
-  .line{background:var(--blush)}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-  .card{background:#fff;border-radius:var(--r);padding:34px 28px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;position:relative}
-  .card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
-  .card .pill{display:inline-block;font-weight:800;letter-spacing:.12em;font-size:.68rem;padding:6px 14px;border-radius:999px;margin-bottom:18px}
-  .pill.now{background:var(--lush);color:#fff}
-  .pill.soon{background:var(--petal);color:var(--deep)}
-  .card .art{height:120px;display:grid;place-items:center;margin-bottom:14px}
-  .card .art svg{height:110px}
-  .card h3{font-size:1.5rem;color:var(--deep);margin-bottom:10px}
-  .card p{font-weight:600;opacity:.85}
-
-  /* ingredients */
-  .ingredients{background:#fff}
-  .ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-  .ing-col{border-radius:var(--r);padding:38px 34px}
-  .ing-yes{background:var(--blush)}
-  .ing-no{background:var(--deep);color:#fff}
-  .ing-col h3{font-size:1.5rem;margin-bottom:24px;letter-spacing:.02em}
-  .ing-yes h3{color:var(--leaf)}
-  .ing-no h3{color:#fff;opacity:.85}
-  .ing-item{display:flex;gap:14px;margin-bottom:18px}
-  .ing-item .mk{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800}
-  .ing-yes .mk{background:var(--leaf);color:#fff}
-  .ing-no .mk{background:rgba(255,255,255,.14);color:#fff}
-  .ing-item b{display:block;font-size:1.05rem;margin-bottom:2px}
-  .ing-yes .ing-item small,.ing-no .ing-item small{font-size:.92rem;opacity:.75;font-weight:600}
-  .spec{margin-top:24px;text-align:center;font-weight:800;color:var(--deep);background:var(--petal);border-radius:18px;padding:16px}
-
-  /* berry drop */
-  .drop{background:linear-gradient(150deg,var(--lush),var(--deep));color:#fff;position:relative;overflow:hidden}
-  .drop .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}
-  .drop .eyebrow{color:#fff;opacity:.75}
-  .drop h2{font-size:clamp(2rem,4.4vw,3rem);margin-bottom:16px}
-  .drop p{font-size:1.12rem;font-weight:600;opacity:.92;margin-bottom:24px;max-width:460px}
-  .drop-perks{list-style:none;display:grid;gap:12px;margin-bottom:28px}
-  .drop-perks li{display:flex;gap:12px;align-items:center;font-weight:700}
-  .drop-perks .mk{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
-  .drop-card{background:#fff;color:var(--ink);border-radius:var(--r);padding:36px;text-align:center;box-shadow:var(--shadow)}
-  .drop-card .save{font-family:var(--display);font-weight:800;font-size:3.4rem;color:var(--lush);line-height:1}
-  .drop-card .save span{font-size:1.2rem}
-  .drop-card .cadence{font-weight:700;opacity:.7;margin:8px 0 22px}
-  .drop-card .fineprint{font-size:.85rem;opacity:.6;margin-top:14px;font-weight:600}
-
-  /* story */
-  .story{background:var(--blush)}
-  .story .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
-  .story-art{background:var(--lush);border-radius:36px;padding:44px;text-align:center;color:#fff;box-shadow:var(--shadow)}
-  .story-art svg{width:min(220px,70%);margin-bottom:20px}
-  .story-art .quote{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.2;font-style:italic}
-  .story-art .attr{opacity:.8;margin-top:14px;font-weight:700;font-size:.9rem}
-  .story h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--deep);margin-bottom:18px}
-  .story p{font-size:1.1rem;font-weight:600;margin-bottom:16px}
-  .mv{display:grid;gap:14px;margin-top:24px}
-  .mv-item{background:#fff;border-radius:20px;padding:20px 24px;box-shadow:var(--shadow-sm)}
-  .mv-item b{color:var(--lush);letter-spacing:.14em;font-size:.75rem;display:block;margin-bottom:4px}
-
-  /* personas / social */
-  .who{background:#fff}
-  .who-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .who-card{background:var(--blush);border-radius:var(--r);padding:34px 28px;text-align:center}
-  .who-card .ico{width:60px;height:60px;border-radius:50%;background:var(--lush);display:grid;place-items:center;margin:0 auto 18px}
-  .who-card h3{font-size:1.35rem;color:var(--deep);margin-bottom:4px}
-  .who-card .age{font-weight:700;opacity:.6;font-size:.85rem;margin-bottom:16px}
-  .who-card .say{font-style:italic;color:var(--lush);font-weight:700;margin-bottom:16px}
-  .who-card p{font-weight:600;opacity:.85;font-size:.95rem}
-
-  /* signup */
-  .signup{background:linear-gradient(160deg,var(--petal),var(--blush));text-align:center}
-  .signup h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--deep);margin-bottom:12px}
-  .signup p{font-size:1.12rem;font-weight:600;margin-bottom:28px;opacity:.85}
-  .signup-form{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-  .signup-form input{flex:1;min-width:220px;border:2px solid #fff;background:#fff;border-radius:999px;padding:15px 24px;font-family:var(--body);font-size:1rem;font-weight:600;color:var(--ink);outline:none;transition:border-color .15s}
-  .signup-form input:focus{border-color:var(--lush)}
-  .signup-note{font-size:.82rem;opacity:.6;margin-top:14px;font-weight:600}
-  .signup-ok{color:var(--leaf);font-weight:800;margin-top:16px;display:none}
-
-  /* faq */
-  .faq{background:#fff}
-  .faq-list{max-width:760px;margin:0 auto}
-  .faq-item{border-bottom:2px solid var(--blush)}
-  .faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;padding:22px 4px;font-family:var(--body);font-weight:800;font-size:1.12rem;color:var(--deep);display:flex;justify-content:space-between;align-items:center;gap:16px}
-  .faq-q .plus{font-family:var(--display);color:var(--lush);font-size:1.6rem;transition:transform .25s;flex:none}
-  .faq-item.open .plus{transform:rotate(45deg)}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-weight:600}
-  .faq-a p{padding:0 4px 22px}
-
-  /* footer */
-  footer{background:var(--deep);color:#fff;padding:64px 0 30px}
-  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px}
-  .foot-brand .logo{color:#fff;margin-bottom:14px}
-  .foot-brand p{opacity:.75;font-weight:600;max-width:260px}
-  .foot-col h4{font-family:var(--display);font-size:1.05rem;margin-bottom:16px}
-  .foot-col a{display:block;opacity:.75;font-weight:600;margin-bottom:10px;transition:opacity .15s}
-  .foot-col a:hover{opacity:1}
-  .socials{display:flex;gap:12px;margin-top:16px}
-  .socials a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;transition:background .15s}
-  .socials a:hover{background:var(--lush)}
-  .foot-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem;opacity:.7;font-weight:600}
-  .allergen{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 18px;font-size:.82rem;opacity:.8;font-weight:600;margin-bottom:24px}
-
-  /* cart drawer */
-  .overlay{position:fixed;inset:0;background:rgba(92,16,48,.4);opacity:0;visibility:hidden;transition:.25s;z-index:99}
-  .overlay.on{opacity:1;visibility:visible}
-  .drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,90vw);background:#fff;z-index:100;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(92,16,48,.2)}
-  .drawer.on{transform:translateX(0)}
-  .drawer-head{padding:24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--blush)}
-  .drawer-head h3{font-size:1.4rem;color:var(--deep)}
-  .drawer-close{background:var(--blush);border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.2rem;color:var(--deep)}
-  .ship-bar{padding:16px 24px;background:var(--blush)}
-  .ship-bar p{font-size:.85rem;font-weight:700;margin-bottom:8px}
-  .ship-track{height:8px;background:var(--petal);border-radius:999px;overflow:hidden}
-  .ship-fill{height:100%;background:var(--leaf);width:0;transition:width .4s;border-radius:999px}
-  .drawer-body{flex:1;overflow-y:auto;padding:16px 24px}
-  .line-item{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--blush)}
-  .line-item .li-art{width:56px;height:56px;background:var(--blush);border-radius:14px;display:grid;place-items:center;flex:none}
-  .line-item .li-art svg{width:38px}
-  .line-item .li-info{flex:1}
-  .line-item .li-info b{display:block;color:var(--deep)}
-  .line-item .li-info small{opacity:.6;font-weight:700}
-  .qty{display:flex;align-items:center;gap:8px;margin-top:6px}
-  .qty button{width:24px;height:24px;border-radius:50%;border:none;background:var(--petal);color:var(--deep);font-weight:800;cursor:pointer}
-  .li-remove{background:none;border:none;color:var(--lush);cursor:pointer;font-weight:800;font-size:.8rem}
-  .cart-empty{text-align:center;padding:50px 20px;color:var(--ink)}
-  .cart-empty svg{width:120px;margin-bottom:16px}
-  .cart-empty p{font-weight:700;opacity:.7}
-  .drawer-foot{padding:24px;border-top:1px solid var(--blush)}
-  .drawer-foot .total{display:flex;justify-content:space-between;font-weight:800;font-size:1.2rem;color:var(--deep);margin-bottom:16px}
-  .drawer-foot .btn{width:100%;justify-content:center}
-
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--deep);color:#fff;padding:14px 26px;border-radius:999px;font-weight:800;z-index:120;transition:transform .3s cubic-bezier(.34,1.56,.64,1);box-shadow:var(--shadow)}
-  .toast.on{transform:translateX(-50%) translateY(0)}
-
-  .bounce{animation:bounce .5s cubic-bezier(.34,1.56,.64,1)}
-  @keyframes bounce{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
-
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
-  .reveal.in{opacity:1;transform:none}
-
-  @media (max-width:900px){
-    .hero .wrap,.feat-grid,.ing-grid,.drop .wrap,.story .wrap{grid-template-columns:1fr}
-    .cards,.who-cards{grid-template-columns:1fr}
-    .foot-grid{grid-template-columns:1fr 1fr}
-    nav ul{display:none}
-    .menu-toggle{display:grid;place-items:center}
-    .hero-art{order:-1}
-    .drop-card{max-width:400px;margin:0 auto}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-    .reveal{opacity:1;transform:none}
-  }
-</style>
+<link rel="stylesheet" href="/assets/fonts/fonts-berrylush.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -341,7 +70,7 @@
       <li><a href="#faq">FAQ</a></li>
     </ul></nav>
     <div class="nav-right">
-      <button class="cart-btn" onclick="openCart()" aria-label="Open cart">
+      <button class="cart-btn" data-action="open-cart" aria-label="Open cart">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5C1030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span class="cart-count" id="cartCount">0</span>
       </button>
@@ -360,7 +89,7 @@
       <p class="lead">A soft, sugar-kissed chew with a molten strawberry heart. Juicy inside. Chewy outside. Pure happiness.</p>
       <p class="price-note">Original Chews · 4 oz pouch · $4.49</p>
       <div class="hero-cta">
-        <button class="btn" onclick="addToCart('Original Chews','4 oz pouch',4.49,'pouch')">Shop the pouch</button>
+        <button class="btn" data-action="add" data-name="Original Chews" data-variant="4 oz pouch" data-price="4.49" data-art="pouch">Shop the pouch</button>
         <a href="#berrydrop" class="btn ghost">Join The Berry Drop</a>
       </div>
     </div>
@@ -405,7 +134,7 @@
         </ul>
         <div class="buy-row">
           <div class="price">$4.49 <small>/ 4 oz</small></div>
-          <button class="btn" onclick="addToCart('Original Chews','4 oz pouch',4.49,'pouch')">Add to cart</button>
+          <button class="btn" data-action="add" data-name="Original Chews" data-variant="4 oz pouch" data-price="4.49" data-art="pouch">Add to cart</button>
         </div>
       </div>
     </div>
@@ -426,21 +155,21 @@
         <div class="art"><svg><use href="#pouch"/></svg></div>
         <h3>Original Chews</h3>
         <p>4 oz resealable stand-up pouch. The flagship — juicy strawberry chews, sugar-sanded, molten center.</p>
-        <div style="margin-top:20px"><button class="btn" onclick="addToCart('Original Chews','4 oz pouch',4.49,'pouch')">Add · $4.49</button></div>
+        <div style="margin-top:20px"><button class="btn" data-action="add" data-name="Original Chews" data-variant="4 oz pouch" data-price="4.49" data-art="pouch">Add · $4.49</button></div>
       </div>
       <div class="card reveal">
         <span class="pill now">MINIS</span>
         <div class="art"><svg><use href="#minis"/></svg></div>
         <h3>Lush Minis</h3>
         <p>Individually wrapped share-size minis in a 10 oz family bag. Lunchboxes, desks, and "take two" bowls.</p>
-        <div style="margin-top:20px"><button class="btn" onclick="addToCart('Lush Minis','10 oz bag',9.99,'minis')">Add · $9.99</button></div>
+        <div style="margin-top:20px"><button class="btn" data-action="add" data-name="Lush Minis" data-variant="10 oz bag" data-price="9.99" data-art="minis">Add · $9.99</button></div>
       </div>
       <div class="card reveal">
         <span class="pill soon">WAVE 3 · +12 MO</span>
         <div class="art"><svg><use href="#mascot"/></svg></div>
         <h3>Flavor Drops</h3>
         <p>Limited seasonal runs that stay on-brand: Strawberry Lemonade, Berries &amp; Cream, Sour Lush.</p>
-        <div style="margin-top:20px"><button class="btn ghost" onclick="notifyMe()">Notify me</button></div>
+        <div style="margin-top:20px"><button class="btn ghost" data-action="notify">Notify me</button></div>
       </div>
     </div>
   </div>
@@ -490,7 +219,7 @@
         <li><span class="mk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg></span> Early access to seasonal Flavor Drops</li>
         <li><span class="mk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg></span> Subscriber-only mascot merch drops</li>
       </ul>
-      <button class="btn ghost" onclick="addToCart('Original Chews (Berry Drop)','30-day · save 15%',3.82,'pouch')">Start my Berry Drop</button>
+      <button class="btn ghost" data-action="add" data-name="Original Chews (Berry Drop)" data-variant="30-day · save 15%" data-price="3.82" data-art="pouch">Start my Berry Drop</button>
     </div>
     <div class="drop-card">
       <div class="save">15%<span> off</span></div>
@@ -563,7 +292,7 @@
       <div class="eyebrow">Get 10% off your first order</div>
       <h2>Join the pink side.</h2>
       <p>Launch drops, restocks, and seasonal Flavor Drops — straight to your inbox. No spam, just strawberry.</p>
-      <form class="signup-form" onsubmit="signup(event)">
+      <form class="signup-form" id="signupForm">
         <input type="email" placeholder="you@email.com" required aria-label="Email address">
         <button class="btn" type="submit">Get my 10% off</button>
       </form>
@@ -581,12 +310,12 @@
       <h2>Questions, answered.</h2>
     </div>
     <div class="faq-list reveal">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is BerryLush really made with real strawberries?<span class="plus">+</span></button><div class="faq-a"><p>Yes — real strawberry purée and juice concentrate lead the recipe. That's about 20% real fruit content, and it's the first flavor you taste. Fruit you can actually taste, not just read on the front.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is it vegan and gluten-free?<span class="plus">+</span></button><div class="faq-a"><p>Both. We set our chews with plant-based fruit pectin instead of gelatin, and they're gluten-free and made in a nut-free facility. Vegan, gluten-free, and non-GMO.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Will the candy melt in summer shipping?<span class="plus">+</span></button><div class="faq-a"><p>We ship with heat-safe packaging and warm-weather routing. If your order ever arrives less than lush, reach out — we'll make it right.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does The Berry Drop subscription work?<span class="plus">+</span></button><div class="faq-a"><p>Pick your cadence (30, 45, or 60 days) and save 15% on every order plus free shipping. You can skip, pause, swap SKUs, or cancel anytime from your account — cancellation is three clicks, tops. No dark patterns.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Where can I buy BerryLush in stores?<span class="plus">+</span></button><div class="faq-a"><p>We're rolling into specialty and natural grocers now, growing toward 1,200 doors. Order online here anytime, and use our store locator (coming soon) to find a pouch near you.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What are the shipping and return details?<span class="plus">+</span></button><div class="faq-a"><p>Flat-rate shipping with free shipping over $30, US only at launch. Something not right? Contact us and we'll sort it out fast.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">Is BerryLush really made with real strawberries?<span class="plus">+</span></button><div class="faq-a"><p>Yes — real strawberry purée and juice concentrate lead the recipe. That's about 20% real fruit content, and it's the first flavor you taste. Fruit you can actually taste, not just read on the front.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">Is it vegan and gluten-free?<span class="plus">+</span></button><div class="faq-a"><p>Both. We set our chews with plant-based fruit pectin instead of gelatin, and they're gluten-free and made in a nut-free facility. Vegan, gluten-free, and non-GMO.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">Will the candy melt in summer shipping?<span class="plus">+</span></button><div class="faq-a"><p>We ship with heat-safe packaging and warm-weather routing. If your order ever arrives less than lush, reach out — we'll make it right.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">How does The Berry Drop subscription work?<span class="plus">+</span></button><div class="faq-a"><p>Pick your cadence (30, 45, or 60 days) and save 15% on every order plus free shipping. You can skip, pause, swap SKUs, or cancel anytime from your account — cancellation is three clicks, tops. No dark patterns.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">Where can I buy BerryLush in stores?<span class="plus">+</span></button><div class="faq-a"><p>We're rolling into specialty and natural grocers now, growing toward 1,200 doors. Order online here anytime, and use our store locator (coming soon) to find a pouch near you.</p></div></div>
+      <div class="faq-item"><button class="faq-q" data-action="faq">What are the shipping and return details?<span class="plus">+</span></button><div class="faq-a"><p>Flat-rate shipping with free shipping over $30, US only at launch. Something not right? Contact us and we'll sort it out fast.</p></div></div>
     </div>
   </div>
 </section>
@@ -634,11 +363,11 @@
 </footer>
 
 <!-- CART -->
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="overlay" id="overlay" data-action="close-cart"></div>
 <aside class="drawer" id="drawer" aria-label="Shopping cart">
   <div class="drawer-head">
     <h3>Your pouch</h3>
-    <button class="drawer-close" onclick="closeCart()" aria-label="Close cart">✕</button>
+    <button class="drawer-close" data-action="close-cart" aria-label="Close cart">✕</button>
   </div>
   <div class="ship-bar">
     <p id="shipMsg">Add $30 for free shipping!</p>
@@ -647,100 +376,12 @@
   <div class="drawer-body" id="cartBody"></div>
   <div class="drawer-foot">
     <div class="total"><span>Total</span><span id="cartTotal">$0.00</span></div>
-    <button class="btn dark" onclick="checkout()">Checkout</button>
+    <button class="btn dark" data-action="checkout">Checkout</button>
   </div>
 </aside>
 
 <div class="toast" id="toast"></div>
 
-<script>
-  const cart=[];
-  const FREE_SHIP=30;
-  const artFor={pouch:'pouch',minis:'minis'};
-
-  function money(n){return '$'+n.toFixed(2)}
-
-  function addToCart(name,variant,price,art){
-    const existing=cart.find(i=>i.name===name&&i.variant===variant);
-    if(existing){existing.qty++}
-    else{cart.push({name,variant,price,art,qty:1})}
-    renderCart();
-    const c=document.getElementById('cartCount');
-    c.classList.remove('bounce');void c.offsetWidth;c.classList.add('bounce');
-    showToast('Added to your pouch 🍓');
-  }
-
-  function renderCart(){
-    const count=cart.reduce((s,i)=>s+i.qty,0);
-    document.getElementById('cartCount').textContent=count;
-    const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-    document.getElementById('cartTotal').textContent=money(total);
-    const body=document.getElementById('cartBody');
-    if(!cart.length){
-      body.innerHTML='<div class="cart-empty"><svg viewBox="0 0 220 260"><use href="#mascot"/></svg><p>Your pouch is empty.<br>Let\'s fix that.</p></div>';
-    }else{
-      body.innerHTML=cart.map((i,idx)=>`
-        <div class="line-item">
-          <div class="li-art"><svg viewBox="0 0 160 220"><use href="#${i.art}"/></svg></div>
-          <div class="li-info">
-            <b>${i.name}</b><small>${i.variant} · ${money(i.price)}</small>
-            <div class="qty">
-              <button onclick="chQty(${idx},-1)" aria-label="Decrease">−</button>
-              <span>${i.qty}</span>
-              <button onclick="chQty(${idx},1)" aria-label="Increase">+</button>
-            </div>
-          </div>
-          <button class="li-remove" onclick="removeItem(${idx})">Remove</button>
-        </div>`).join('');
-    }
-    // ship bar
-    const remain=FREE_SHIP-total;
-    const fill=document.getElementById('shipFill');
-    const msg=document.getElementById('shipMsg');
-    fill.style.width=Math.min(100,(total/FREE_SHIP)*100)+'%';
-    msg.textContent=remain>0?`Add ${money(remain)} for free shipping!`:'🎉 You unlocked free shipping!';
-  }
-
-  function chQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);renderCart()}
-  function removeItem(i){cart.splice(i,1);renderCart()}
-
-  function openCart(){document.getElementById('drawer').classList.add('on');document.getElementById('overlay').classList.add('on')}
-  function closeCart(){document.getElementById('drawer').classList.remove('on');document.getElementById('overlay').classList.remove('on')}
-
-  function checkout(){
-    if(!cart.length){showToast('Add something juicy first 🍓');return}
-    showToast('Demo checkout — Apple Pay, Shop Pay & more at launch');
-  }
-  function notifyMe(){showToast('On the list! We\'ll ping you at drop time 🍓')}
-
-  let toastTimer;
-  function showToast(msg){
-    const t=document.getElementById('toast');
-    t.textContent=msg;t.classList.add('on');
-    clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),2600);
-  }
-
-  function toggleFaq(btn){
-    const item=btn.parentElement;
-    const a=item.querySelector('.faq-a');
-    const open=item.classList.toggle('open');
-    a.style.maxHeight=open?a.scrollHeight+'px':0;
-  }
-
-  function signup(e){
-    e.preventDefault();
-    e.target.reset();
-    document.getElementById('signupOk').style.display='block';
-    showToast('Welcome to the pink side 🍓');
-  }
-
-  // scroll reveal
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
-  },{threshold:.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  renderCart();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
