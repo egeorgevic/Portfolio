@@ -278,13 +278,20 @@ h3 { font-size: clamp(1.2rem, 1.9vw, 1.5rem); letter-spacing: -.01em; }
 .tl-what li::before { content: ""; position: absolute; left: 0; top: .68em; width: 7px; height: 1px; background: var(--ink-2); }
 
 /* ---------- Contact ---------- */
-.contact-card {
-  border: 1px solid var(--ink); padding: clamp(28px, 5vw, 56px); background: var(--paper-2);
-  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px);
-  align-items: start;
-}
+.contact-card { border: 1px solid var(--ink); padding: clamp(28px, 5vw, 56px); background: var(--paper-2); }
 .contact-card h2 { margin-bottom: var(--s2); }
-.contact-intro p { color: var(--ink-2); }
+.contact-card p { color: var(--ink-2); max-width: 46ch; }
+
+/* Two-column variant — homepage only. The case-study cards have three
+   direct children (h2, p, .contact-cta) and would be split across the
+   columns by a grid applied to .contact-card itself. */
+.contact-card--split {
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 5vw, 72px); align-items: start;
+}
+
+/* Case-study call to action */
+.contact-cta { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s4); }
 
 .contact-form { display: flex; flex-direction: column; gap: var(--s3); }
 .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
@@ -395,7 +402,7 @@ code { font-family: var(--mono); font-size: .875em; background: var(--paper-2); 
   .titleblock { max-width: 22rem; }
   .dwg-body { grid-template-columns: 1fr; gap: var(--s4); }
   .about-grid { grid-template-columns: 1fr; gap: var(--s4); }
-  .contact-card { grid-template-columns: 1fr; gap: var(--s4); }
+  .contact-card--split { grid-template-columns: 1fr; gap: var(--s4); }
   .cs-cols { grid-template-columns: 1fr; gap: var(--s4); }
   .svc { grid-template-columns: 3.5rem minmax(0, 1fr); gap: var(--s3) var(--s2); }
   .svc ul { grid-column: 2; }
